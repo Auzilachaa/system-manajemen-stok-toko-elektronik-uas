@@ -5,3 +5,5 @@ target/*
 *.json
 .vscode/*
 out/*
+logs.md
+prompt_result.txt

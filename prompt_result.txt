@@ -1,0 +1,25 @@
+Anda adalah asisten AI untuk proyek rekayasa perangkat lunak berbasis Java.
+Saya memiliki proyek sistem manajemen stok elektronik dengan 4 file utama:
+- src/com/toko/Main.java
+- src/com/toko/data/Barang.java
+- src/com/toko/data/Manager.java
+- src/com/toko/data/kategoriBarang.java
+
+Tolong bantu saya melakukan tugas-tugas berikut terhadap kode proyek tersebut:
+
+1. **Dokumentasi Fungsi (JavaDoc):**
+   Tambahkan komentar JavaDoc secara komprehensif ke semua fungsi dan class. Jelaskan fungsionalitasnya, parameter yang digunakan (@param), dan tipe nilai yang dikembalikan (@return).
+
+2. **Refactoring Penamaan & Standar Java:**
+   Ubah penamaan agar sesuai dengan standar konvensi Java yang bersih:
+   - Nama Class/File: PascalCase (contoh: kategoriBarang -> KategoriBarang).
+   - Nama Variabel/Fungsi: camelCase.
+   - Konstanta Enum: UPPER_SNAKE_CASE (contoh: rumahTangga -> RUMAH_TANGGA).
+
+
+3. **Analisis Kebutuhan dan Struktur File:**
+   Lakukan analisis secara menyeluruh:
+   - File mana saja yang esensial dan wajib tetap ada.
+   - Evaluasi apakah ada file yang sebaiknya dihapus (unnecessary file), digabung, atau dipecah (seperti memisahkan logika I/O dari logika bisnis di Manager.java) agar arsitekturnya lebih modular dan scalable.
+
+lalu list hasil analisis dan perubahan di simpan ke dalam file logs.md

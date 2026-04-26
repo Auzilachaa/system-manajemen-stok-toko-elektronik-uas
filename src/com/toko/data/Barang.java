@@ -1,5 +1,5 @@
 package com.toko.data;
-   
+
 public class Barang {
     public int id;
     public String nama;
@@ -15,4 +15,3 @@ public class Barang {
         this.status = status; // false = tidak ada, true = ada
     }
 }
-
