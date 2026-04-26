@@ -7,7 +7,7 @@ import com.toko.data.Manager;
 import com.toko.data.kategoriBarang;
 
 public class Main {
-    static Scanner input = new Scanner(System.in);
+    public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         int pilihan = 0;
@@ -17,8 +17,9 @@ public class Main {
             System.out.println("1. Tambah Barang");
             System.out.println("2. Tampilkan Barang");
             System.out.println("3. Hapus Barang");
-            System.out.println("4. Keluar");
-            System.out.print("Pilih menu (1-4): ");
+            System.out.println("4. Update Barang");
+            System.out.println("5. Keluar");
+            System.out.print("Pilih menu (1-5): ");
 
             pilihan = input.nextInt();
             input.nextLine();
@@ -28,7 +29,7 @@ public class Main {
                     addMenu();
                     break;
                 case 2:
-                    showMenu();
+                    Manager.cetakBaris(Manager.load(Manager.filePath));
                     break;
                 case 3:
                     System.out.print("Masukkan nama barang yang akan dihapus: ");
@@ -36,20 +37,17 @@ public class Main {
                     Manager.delete(key);
                     break;
                 case 4:
+                    System.out.print("Masukkan ID barang yang akan diupdate: ");
+                    int key2 = input.nextInt();
+                    Manager.edit(key2);
+                    break;
+                case 5:
                     System.out.println("Program selesai.");
                     break;
                 default:
                     System.out.println("Pilihan tidak valid.");
                     break;
             }
-        }
-    }
-
-    static void cetakBaris(List<Barang> list) {
-        System.out.printf("\n| %-5s | %-15s | %-15s | %-8s | %-10s |%n", "id", "nama", "kategori", "stok", "status");
-        System.out.println("________________________________________________________________________");
-        for (Barang b : list) {
-            System.out.printf("| %-5d | %-15s | %-15s | %-8d | %-10b |%n", b.id, b.nama, b.kategori, b.stok, b.status);
         }
     }
 
@@ -75,14 +73,10 @@ public class Main {
         Manager.save(list);
 
         for (Barang b : list) {
-            if (b.status != false){
-                cetakBaris(list);
+            if (b.status != false) {
+                Manager.cetakBaris(list);
             }
         }
     }
 
-    static void showMenu() throws Exception {
-        List<Barang> list = Manager.load(Manager.filePath);
-        cetakBaris(list);
-    }
 }

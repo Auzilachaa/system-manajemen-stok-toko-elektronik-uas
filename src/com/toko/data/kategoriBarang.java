@@ -16,7 +16,8 @@ public enum kategoriBarang {
 
     public static kategoriBarang dariNomor(int nomor) {
         kategoriBarang[] list = values();
-        if (nomor < 1 || nomor > list.length) return null;
+        if (nomor < 1 || nomor > list.length)
+            return null;
         return list[nomor - 1];
     }
 }
