@@ -12,7 +12,7 @@
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
-            "mainClass": "com.toko.Main"
+            "mainClass": "Main"
         }
     ]
 }

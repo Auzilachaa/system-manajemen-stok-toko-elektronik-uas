@@ -1,4 +1,4 @@
-package com.toko.data;
+package data;
 
 public class Barang {
     public int id;

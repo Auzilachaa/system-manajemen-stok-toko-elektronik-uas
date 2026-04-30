@@ -1,4 +1,4 @@
-package com.toko.data;
+package data;
 
 public enum kategoriBarang {
     rumahTangga,
