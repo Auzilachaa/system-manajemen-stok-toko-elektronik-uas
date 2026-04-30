@@ -1,20 +1,21 @@
-package com.toko.data;
+package data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import static com.toko.Main.*;
+import java.util.Scanner;
 
 public class Manager {
 
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    static Path path = Paths.get(System.getProperty("user.dir"), "src/com/toko/resources/data.json");
+    static Path path = Paths.get(System.getProperty("user.dir"), "src/resources/data.json");
     public static String filePath = path.toString();
 
     public static void save(List<Barang> barang) throws IOException {
@@ -70,7 +71,7 @@ public class Manager {
         save(list);
     }
 
-    public static void edit(int key2) throws Exception {
+    public static void edit(int key2, Scanner input) throws Exception {
         List<Barang> list = load(filePath);
         Barang b = cariById(key2);
 
@@ -79,7 +80,7 @@ public class Manager {
             return;
         }
         System.out.println("  EDIT DATA  (Enter = tidak diubah)");
-        cetakBaris(list);
+        cetak(list);
         System.out.println();
 
         // --- Nama (String) ---
@@ -130,9 +131,10 @@ public class Manager {
         save(list);
         System.out.println("\n[✓] Data berhasil diupdate.");
         System.out.println("Data setelah edit:");
-        cetakBaris(list);
+        cetak(list);
     }
 
+    // auto increment id
     public static int getNextId(List<Barang> list) throws Exception {
         int max = 0;
 
@@ -155,11 +157,64 @@ public class Manager {
         return null;
     }
 
-    public static void cetakBaris(List<Barang> list) {
-        System.out.printf("\n| %-5s | %-15s | %-15s | %-8s | %-10s |%n", "id", "nama", "kategori", "stok", "status");
-        System.out.println("________________________________________________________________________");
+    // 1. Cetak untuk sebuah List (Banyak Data)
+    public static void cetak(List<Barang> list) {
+        cetakHeader();
         for (Barang b : list) {
-            System.out.printf("| %-5d | %-15s | %-15s | %-8d | %-10b |%n", b.id, b.nama, b.kategori, b.stok, b.status);
+
+            cetakIsi(b);
+            
         }
+        System.out.println("└───────┴─────────────────┴─────────────────┴──────────┴────────────┘");
     }
+
+    // 2. Cetak untuk 1 Object Barang saja
+    public static void cetak(Barang b) {
+        cetakHeader();
+        cetakIsi(b);
+        System.out.println("└───────┴─────────────────┴─────────────────┴──────────┴────────────┘");
+    }
+
+    // Helper Method: Cetak Header Table
+    private static void cetakHeader() {
+        System.out.println();
+        System.out.println("┌───────┬─────────────────┬─────────────────┬──────────┬────────────┐");
+        System.out.printf("│ %-5s │ %-15s │ %-15s │ %-8s │ %-10s │%n", "ID", "Nama", "Kategori", "Stok", "tersedia ?");
+        System.out.println("├───────┼─────────────────┼─────────────────┼──────────┼────────────┤");
+    }
+
+    // Helper Method: Cetak Isi / Data Barang
+    private static void cetakIsi(Barang b) {
+        String statusText = b.status ? "ya" : "tidak ";
+        System.out.printf("│ %-5d │ %-15s │ %-15s │ %-8d │ %-10s │%n", b.id, b.nama, b.kategori, b.stok, statusText);
+    }
+
+    // helper method for integer input error handling
+    public static int cekIputInt(String msg, Scanner input) {
+
+        boolean success = false;
+        int angka = 0;
+        while (!success) {
+            System.out.print(msg + " :");
+            String data = input.nextLine();
+            try {
+                angka = Integer.parseInt(data);
+                success = true;
+            } catch (NumberFormatException e) {
+                System.out.println("[!] Input tidak valid. Masukkan angka.");
+            }
+
+        }
+        return angka;
+
+    }
+
 }
+
+// ┌──────────────────────────────────┬─────────┬────────────────────────┬──────────┬────────────────┐
+// │ Col1 │ Col2 │ Col3 │ col4 │ Numeric Column │
+// ├──────────────────────────────────┼─────────┼────────────────────────┼──────────┼────────────────┤
+// │ Value 1 │ Value 2 │ 123 │ 10.0 │ │
+// │ Separate │ cols │ with a tab or 4 spaces │ -2,027.1 │ │
+// │ This is a row with only one cell │ │ │ │ │
+// └──────────────────────────────────┴─────────┴────────────────────────┴──────────┴────────────────┘
