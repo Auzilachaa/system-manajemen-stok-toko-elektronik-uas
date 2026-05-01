@@ -1,9 +1,7 @@
-*.lst
-requirments/*
-target/*
+
 *.class
 *.json
 .vscode/*
-out/*
-logs.md
-prompt_result.txt
+bin/*
+lib/*
+*.sh
