@@ -27,8 +27,9 @@ public class Manager {
 
     public static List<Barang> load(String filename) throws Exception {
         File file = new File(filename);
-        if (!file.exists())
+        if (!file.exists()) {
             return new ArrayList<>();
+        }
 
         try (Reader reader = new FileReader(file)) {
             Type type = new TypeToken<List<Barang>>() {
@@ -86,8 +87,9 @@ public class Manager {
         // --- Nama (String) ---
         System.out.print("Nama [" + b.nama + "]: ");
         String inputNama = input.nextLine().trim();
-        if (!inputNama.isEmpty())
+        if (!inputNama.isEmpty()) {
             b.nama = inputNama;
+        }
 
         // --- Kode (int) ---
         System.out.print("Kode [" + b.id + "]: ");
@@ -108,10 +110,11 @@ public class Manager {
         if (!inputKat.isEmpty()) {
             try {
                 kategoriBarang katBaru = kategoriBarang.dariNomor(Integer.parseInt(inputKat));
-                if (katBaru != null)
-                    b.kategori = katBaru;
-                else
+                if (katBaru != null) {
+                    b.kategori = katBaru; 
+                }else {
                     System.out.println("[!] Pilihan tidak valid, kategori tidak diubah.");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("[!] Kategori tidak diubah.");
             }
@@ -163,7 +166,7 @@ public class Manager {
         for (Barang b : list) {
 
             cetakIsi(b);
-            
+
         }
         System.out.println("└───────┴─────────────────┴─────────────────┴──────────┴────────────┘");
     }
@@ -208,7 +211,45 @@ public class Manager {
         return angka;
 
     }
+// ===== SEARCH =====
 
+// Linear Search (nama)
+    public static List<Barang> linearSearchNama(String keyword) throws Exception {
+        List<Barang> list = load(filePath);
+        List<Barang> hasil = new ArrayList<>();
+
+        for (Barang b : list) {
+            if (b.nama.toLowerCase().contains(keyword.toLowerCase())) {
+                hasil.add(b);
+            }
+        }
+
+        return hasil;
+    }
+
+// Binary Search (ID)
+    public static Barang binarySearchId(int idCari) throws Exception {
+        List<Barang> list = load(filePath);
+
+        list.sort((a, b) -> a.id - b.id);
+
+        int kiri = 0;
+        int kanan = list.size() - 1;
+
+        while (kiri <= kanan) {
+            int tengah = (kiri + kanan) / 2;
+
+            if (list.get(tengah).id == idCari) {
+                return list.get(tengah);
+            } else if (list.get(tengah).id < idCari) {
+                kiri = tengah + 1;
+            } else {
+                kanan = tengah - 1;
+            }
+        }
+
+        return null;
+    }
 }
 
 // ┌──────────────────────────────────┬─────────┬────────────────────────┬──────────┬────────────────┐

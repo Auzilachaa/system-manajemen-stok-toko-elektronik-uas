@@ -1,23 +1,24 @@
 
-
 import data.Barang;
 import data.Manager;
 import data.kategoriBarang;
 import java.util.*;
 
 public class Main {
+
     public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
         int pilihan = 0;
 
-        while (pilihan != 5) {
+        while (pilihan != 6) {
             System.out.println("\n=== Sistem Manajemen Stok Toko Elektronik ===");
             System.out.println("1. Tampilkan Barang");
             System.out.println("2. Tambah Barang");
             System.out.println("3. Hapus Barang");
             System.out.println("4. Update Barang");
-            System.out.println("5. Keluar");
+            System.out.println("5. Cari Barang");
+            System.out.println("6. Keluar");
             System.out.print("Pilih menu (1-5): ");
 
             pilihan = input.nextInt();
@@ -46,6 +47,10 @@ public class Main {
                     break;
 
                 case 5:
+                    menuCari();
+                    break;
+
+                case 6:
                     System.out.println("Program selesai.");
                     break;
 
@@ -81,6 +86,46 @@ public class Main {
         Manager.cetak(list);
     }
 
+    static void menuCari() throws Exception {
+        System.out.println("\n1. Cari Nama");
+        System.out.println("2. Cari ID");
+        System.out.print("Pilih: ");
+
+        int pilih = input.nextInt();
+        input.nextLine();
+
+        if (pilih == 1) {
+            cariNama();
+        } else if (pilih == 2) {
+            cariId();
+        }
+
+    }
+
+    static void cariNama() throws Exception {
+        System.out.print("Masukkan nama: ");
+        String nama = input.nextLine();
+
+        List<Barang> hasil = Manager.linearSearchNama(nama);
+
+        if (hasil.isEmpty()) {
+            System.out.println("Tidak ditemukan");
+        } else {
+            Manager.cetak(hasil);
+        }
+    }
+
+    static void cariId() throws Exception {
+        System.out.print("Masukkan ID: ");
+        int id = input.nextInt();
+        input.nextLine();
+
+        Barang b = Manager.binarySearchId(id);
+
+        if (b == null) {
+            System.out.println("Tidak ditemukan");
+        } else {
+            Manager.cetak(b);
+        }
+    }
 }
-
-
