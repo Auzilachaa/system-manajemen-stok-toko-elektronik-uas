@@ -1,7 +1,9 @@
 
-*.class
 *.json
-.vscode/*
-bin/*
-lib/*
+.vscode
+bin
+lib
 *.sh
+javafx-sdk-26.0.1
+*.jar
+*.txt

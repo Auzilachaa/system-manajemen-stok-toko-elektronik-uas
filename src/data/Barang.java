@@ -13,5 +13,13 @@ public class Barang {
         this.stok = stok;
         this.kategori = kategori;
         this.status = status; // false = tidak ada, true = ada
+
+        
     }
+
+    public int getId()                { return id; }
+    public String getNama()           { return nama; }
+    public int getStok()              { return stok; }
+    public kategoriBarang getKategori(){ return kategori; }
+    public boolean isStatus()         { return status; }
 }

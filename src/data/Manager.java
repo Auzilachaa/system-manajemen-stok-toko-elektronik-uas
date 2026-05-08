@@ -54,6 +54,8 @@ public class Manager {
     public static void delete(String key) throws Exception {
         List<Barang> list = load(filePath);
 
+
+        // bakal diganti
         boolean ditemukan = false;
         for (Barang b : list) {
             if (b.nama.equalsIgnoreCase(key)) {
@@ -97,7 +99,7 @@ public class Manager {
                 b.id = Integer.parseInt(inputKode);
             } catch (NumberFormatException e) {
                 System.out.println("[!] Bukan angka, kode tidak diubah.");
-            }
+            }  
         }
 
         // --- Kategori (enum) ---
@@ -147,6 +149,8 @@ public class Manager {
         return max + 1;
     }
 
+
+    // bakal dihapus
     public static Barang cariById(int id) throws Exception {
         List<Barang> list = load(filePath);
         for (Barang b : list) {
@@ -168,7 +172,7 @@ public class Manager {
         System.out.println("└───────┴─────────────────┴─────────────────┴──────────┴────────────┘");
     }
 
-    // 2. Cetak untuk 1 Object Barang saja
+    // Cetak untuk 1 Object Barang saja
     public static void cetak(Barang b) {
         cetakHeader();
         cetakIsi(b);

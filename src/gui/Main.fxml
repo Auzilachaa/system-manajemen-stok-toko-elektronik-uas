@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="580" prefWidth="900" style="-fx-background-color: #282a36;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+
+    <!-- ===== SIDEBAR KIRI ===== -->
+    <left>
+        <VBox prefWidth="220" style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-width: 0 1 0 0;">
+
+            <!-- Logo -->
+            <VBox style="-fx-padding: 20 16 12 16; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0;">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label style="-fx-background-color: #bd93f9; -fx-text-fill: #21222c; -fx-font-size: 14px; -fx-padding: 4 6; -fx-background-radius: 6;" text="◆" />
+                    <Label style="-fx-text-fill: #f8f8f2; -fx-font-size: 14px; -fx-font-weight: bold;" text="kelompok 7" />
+                </HBox>
+            </VBox>
+
+            <!-- Nav Items -->
+            <VBox prefHeight="358.0" prefWidth="219.0" style="-fx-padding: 12 8 8 8;" VBox.vgrow="ALWAYS">
+
+                <!-- Section: main -->
+                <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px; -fx-padding: 8 8 4 8;" text="MAIN" />
+
+                <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showDashboard" style="-fx-background-color: #282a36; -fx-text-fill: #bd93f9; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="  ■  Dashboard" />
+
+                <!-- Section: kelola -->
+                <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px; -fx-padding: 12 8 4 8;" text="KELOLA" />
+
+                <Button fx:id="btnAdd" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showAdd" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="  Tambah data" />
+                <Button fx:id="btnDelete" alignment="CENTER_LEFT" layoutX="18.0" layoutY="149.0" maxWidth="Infinity" onAction="#showDelete" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="  Hapus data" />
+            </VBox>
+
+            <!-- Footer User -->
+            <VBox style="-fx-padding: 12 8; -fx-border-color: #44475a; -fx-border-width: 1 0 0 0;" />
+
+        </VBox>
+    </left>
+
+    <!-- ===== KONTEN UTAMA ===== -->
+    <center>
+        <BorderPane style="-fx-background-color: #282a36;">
+
+            <!-- Topbar -->
+            <top>
+                <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 14 20; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0; -fx-background-color: #282a36;">
+                    <Label fx:id="pageTitle" style="-fx-text-fill: #f8f8f2; -fx-font-size: 15px; -fx-font-weight: bold;" text="Dashboard" />
+                </HBox>
+            </top>
+
+            <!-- Area Konten -->
+            <center>
+                <StackPane fx:id="contentArea" style="-fx-background-color: #282a36; -fx-padding: 20;">
+
+                    <!-- Dashboard View -->
+                    <VBox fx:id="dashboardView" spacing="16" visible="true">
+
+                        <!-- Stat Cards -->
+                        <HBox spacing="12">
+                            <VBox style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14 16;" HBox.hgrow="ALWAYS">
+                                <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px;" text="TOTAL BARANG" />
+                                <Label fx:id="statTotalBarang" style="-fx-text-fill: #f8f8f2; -fx-font-size: 24px; -fx-font-weight: bold;" text="0" />
+                                <Label style="-fx-background-color: #1a3a2a; -fx-text-fill: #50fa7b; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 4;" text="+12 bulan ini" />
+                            </VBox>
+                            <VBox style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14 16;" HBox.hgrow="ALWAYS">
+                                <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px;" text="KATEGORI" />
+                                <Label fx:id="statKategori" style="-fx-text-fill: #f8f8f2; -fx-font-size: 24px; -fx-font-weight: bold;" text="0" />
+                                <Label style="-fx-background-color: #1a2f3a; -fx-text-fill: #8be9fd; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 4;" text="aktif" />
+                            </VBox>
+                            <VBox style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 14 16;" HBox.hgrow="ALWAYS">
+                                <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px;" text="STOK MENIPIS" />
+                                <Label fx:id="statStokMenipis" style="-fx-text-fill: #f8f8f2; -fx-font-size: 24px; -fx-font-weight: bold;" text="0" />
+                                <Label style="-fx-background-color: #3a1a2a; -fx-text-fill: #ff79c6; -fx-font-size: 10px; -fx-padding: 2 6; -fx-background-radius: 4;" text="perlu restock" />
+                            </VBox>
+                        </HBox>
+
+                        <!-- Table Barang -->
+                        <VBox style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8;" VBox.vgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT" style="-fx-padding: 12 16; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0;">
+                                <Label style="-fx-text-fill: #f8f8f2; -fx-font-size: 13px; -fx-font-weight: bold;" text="Barang Terbaru" />
+                            </HBox>
+                            <TableView fx:id="tableBarang" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-table-cell-border-color: #383a4a; -fx-control-inner-background: #21222c; -fx-control-inner-background-alt: #252636;">
+                                 <columns>
+                                     <TableColumn fx:id="colNama" minWidth="-1.0" prefWidth="84.70593202114105" style="-fx-text-fill: #6272a4;" text="ID">
+                                         <cellValueFactory>
+                                             <PropertyValueFactory property="id" />
+                                         </cellValueFactory>
+                                     </TableColumn>
+                                     <TableColumn fx:id="colNama1" minWidth="-1.0" prefWidth="155.60792541503906" text="NAMA BARANG">
+                                         <cellValueFactory>
+                                             <PropertyValueFactory property="nama" />
+                                         </cellValueFactory>
+                                     </TableColumn>
+                                     <TableColumn fx:id="colKategori" minWidth="-1.0" prefWidth="142.431396484375" text="KATEGORI">
+                                         <cellValueFactory>
+                                             <PropertyValueFactory property="kategori" />
+                                         </cellValueFactory>
+                                     </TableColumn>
+                                     <TableColumn fx:id="colStok" minWidth="-1.0" prefWidth="198.27456665039062" text="STOK">
+                                         <cellValueFactory>
+                                             <PropertyValueFactory property="stok" />
+                                         </cellValueFactory>
+                                     </TableColumn>
+                                 </columns>
+                             </TableView>
+                        </VBox>
+
+                    </VBox>
+
+                </StackPane>
+            </center>
+
+        </BorderPane>
+    </center>
+
+</BorderPane>
