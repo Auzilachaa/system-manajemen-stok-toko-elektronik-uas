@@ -112,7 +112,6 @@ public class Manager {
             }
         }
 
-        // --- Stok (int) ---
         System.out.print("stok [" + b.stok + "]: ");
         String inputJumlah = input.nextLine().trim();
         if (!inputJumlah.isEmpty()) {
@@ -135,10 +134,8 @@ public class Manager {
 
     // auto increment id
     public static int getNextId(List<Barang> list) {
-        // Ambil seed dari id terakhir atau timestamp
         int seed = list.isEmpty() ? (int) System.currentTimeMillis() : list.get(list.size() - 1).id;
         int id = Math.abs((1103515245 * seed + 12345) % 100000); // 5 digit
-        // Pastikan unik
         for (Barang b : list) {
             if (b.id == id) {
                 id++;
@@ -147,7 +144,6 @@ public class Manager {
         return id;
     }
 
-    // bakal dihapus
 
     // Cetak untuk sebuah List (Banyak Data)
     public static void cetakTersedia(List<Barang> list) {
@@ -246,7 +242,7 @@ public class Manager {
         return null;
     }
 
-    // SORTING
+    // ==== SORTING ====
 
     // Bubble Sort berdasarkan ID (Ascending)
     public static void SortByIdASC() {

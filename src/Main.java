@@ -10,7 +10,6 @@ public class Main  {
     public static void main(String[] args) throws Exception {
         // Load data sekali di awal
         Manager.refreshList();
-
         int pilihan = 0;
 
         while (pilihan != 6) {
@@ -130,6 +129,23 @@ public class Main  {
         }
     }
 
+    static void tampilKategoriTertentu(){
+        System.out.println("Masukkan kategori barang:");
+        kategoriBarang.showKategori();
+        System.out.print("Pilihan kategori: ");
+        int pil = Integer.parseInt(input.nextLine());
+        kategoriBarang kategori = kategoriBarang.dariNomor(pil);
+        if (kategori == null) {
+            System.out.println("[!] Kategori tidak valid, diubah menjadi lainnya");
+            kategori = kategoriBarang.lainnya;
+        }
+        for (Barang b : Manager.list) {
+            if (b.kategori == kategori) {
+                Manager.cetak(b);
+            }
+        }
+    }
+
     static void tampilkanBarangMenu() throws Exception{
         System.out.println("\n=== Tampilkan Barang ===");
         System.out.println("1. Tampilkan Barang tersedia (ID ascending)");
@@ -160,6 +176,9 @@ public class Main  {
                 Manager.cetakSemua(Manager.list);
                 break;
             case 5:
+                tampilKategoriTertentu();
+                break;
+            case 6:
                 break;
             default:
                 System.out.println("Pilihan tidak valid.");
