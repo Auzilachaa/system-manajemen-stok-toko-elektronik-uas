@@ -14,44 +14,34 @@ import java.util.List;
 
 public class MainController {
     
-    private boolean resetting = false;
-
     @FXML
     private void initialize() throws Exception{
         // inisialisasi
 
-        idSort.getItems().addAll("ascending", "Reset");
+        idSort.getItems().addAll("ascending");
         idSort.setOnAction(e -> {
-            if (resetting) return;
-            String val = idSort.getValue();
-            if (val == null) return;
-            if ("Reset".equals(val)) {
-                resetData();
-            } else {
-                Manager.SortByIdASC();
-                tampilkanBarang(Manager.list);
-            }
+            namaSort.setValue(null);
+            kategoriSort.setValue(null);
+            stokSort.setValue(null);
+            Manager.SortByIdASC();
+             tampilkanBarang(Manager.list);
+            
         });
 
-        namaSort.getItems().addAll("A-Z", "Reset");
+        namaSort.getItems().addAll("A-Z");
         namaSort.setOnAction(e -> {
-            if (resetting) return;
-            String val = namaSort.getValue();
-            if (val == null) return;
-            if ("Reset".equals(val)) {
-                resetData();
-            } else {
-                Manager.selectionSortByNama();
-                tampilkanBarang(Manager.list);
-            }
+            idSort.setValue(null);
+            kategoriSort.setValue(null);
+            stokSort.setValue(null);
+            Manager.selectionSortByNama();
+            tampilkanBarang(Manager.list);
         });
 
         for (services.kategoriBarang k : services.kategoriBarang.values()) {
             kategoriSort.getItems().add(k.name());
         }
-        kategoriSort.getItems().add("Reset");
+        kategoriSort.getItems();
         kategoriSort.setOnAction(e -> {
-            if (resetting) return;
             String val = kategoriSort.getValue();
             if (val == null) return;
             if ("Reset".equals(val)) {
@@ -74,17 +64,14 @@ public class MainController {
             }
         });
 
-        stokSort.getItems().addAll("descending", "Reset");
+        stokSort.getItems().addAll("descending");
         stokSort.setOnAction(e -> {
-            if (resetting) return;
-            String val = stokSort.getValue();
-            if (val == null) return;
-            if ("Reset".equals(val)) {
-                resetData();
-            } else {
-                Manager.insertionSortByStok();
-                tampilkanBarang(Manager.list);
-            }
+            namaSort.setValue(null);
+            kategoriSort.setValue(null);
+            idSort.setValue(null);
+            Manager.insertionSortByStok();
+            tampilkanBarang(Manager.list);
+            
         });
 
         Manager.list = Manager.load();
@@ -93,7 +80,6 @@ public class MainController {
     }
 
     private void resetData() {
-        resetting = true;
         try {
             Manager.list = Manager.load();
             tampilkanBarang(Manager.list);
@@ -103,8 +89,6 @@ public class MainController {
             stokSort.setValue(null);
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            resetting = false;
         }
     }
 
@@ -181,6 +165,9 @@ public class MainController {
     @FXML
     private void showDelete(ActionEvent event) throws Exception { SwitchHelper.switchScene("delete.fxml", event); }
     
+    @FXML
+    private void showEdit(ActionEvent event) throws Exception { SwitchHelper.switchScene("edit.fxml", event); }
+
     @FXML
     private void exportPdf() {
         try {

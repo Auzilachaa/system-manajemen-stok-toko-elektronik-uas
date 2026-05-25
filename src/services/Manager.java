@@ -62,61 +62,36 @@ public class Manager {
         }
     }
 
-    public static void edit(int key2, Scanner input) throws Exception {
-        Barang b = binarySearchId(key2);
+    public static void edit(Barang b, String inputNama, String inputJumlah, String inputKategori, String status) throws Exception {
 
-        if (b == null || !b.status) {
-            System.out.println("[!] Data tidak ditemukan.");
-            return;
-        }
         System.out.println("  EDIT DATA  (Enter = tidak diubah)");
         cetakTersedia(list);
         System.out.println();
 
         // --- Nama (String) ---
-        System.out.print("Nama [" + b.nama + "]: ");
-        String inputNama = input.nextLine().trim();
-        if (!inputNama.isEmpty()) {
-            b.nama = inputNama;
-        }
-
-        // --- Kode (int) ---
-        System.out.print("Kode [" + b.id + "]: ");
-        String inputKode = input.nextLine().trim();
-        if (!inputKode.isEmpty()) {
-            try {
-                b.id = Integer.parseInt(inputKode);
-            } catch (NumberFormatException e) {
-                System.out.println("[!] Bukan angka, kode tidak diubah.");
-            }
-        }
+       b.nama = inputNama;
+        
 
         // --- Kategori (enum) ---
-        System.out.println("Kategori [" + b.kategori + "] (Enter = skip):");
-        kategoriBarang.showKategori();
-        System.out.print("Pilihan: ");
-        String inputKat = input.nextLine().trim();
-        if (!inputKat.isEmpty()) {
+        if (inputKategori != null && !inputKategori.isEmpty()) {
+            kategoriBarang katBaru = null;
             try {
-                kategoriBarang katBaru = kategoriBarang.dariNomor(Integer.parseInt(inputKat));
-                if (katBaru != null) {
-                    b.kategori = katBaru;
-                } else {
-                    System.out.println("[!] Pilihan tidak valid, kategori tidak diubah.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("[!] Kategori tidak diubah.");
+                katBaru = kategoriBarang.valueOf(inputKategori);
+            } catch (IllegalArgumentException e) {
+            }
+            if (katBaru != null) {
+                b.kategori = katBaru;
             }
         }
 
-        System.out.print("stok [" + b.stok + "]: ");
-        String inputJumlah = input.nextLine().trim();
         if (!inputJumlah.isEmpty()) {
             try {
                 b.stok = Integer.parseInt(inputJumlah);
             } catch (NumberFormatException e) {
-                System.out.println("[!] Bukan angka, stok tidak diubah.");
             }
+        }
+        if (!status.isEmpty()) {
+            b.status = Boolean.parseBoolean(status);
         }
 
         try {

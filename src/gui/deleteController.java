@@ -39,6 +39,8 @@ public class deleteController {
     @FXML
     private void showDelete(ActionEvent event) throws Exception { SwitchHelper.switchScene("delete.fxml", event); }
     
+    @FXML
+    private void showEdit(ActionEvent event) throws Exception { SwitchHelper.switchScene("edit.fxml", event); }
 
     public void deleteBarang() throws Exception {
         String nama = namaBarangInput.getText();

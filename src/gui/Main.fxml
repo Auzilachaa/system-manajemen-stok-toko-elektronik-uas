@@ -31,6 +31,7 @@
         <!-- Section: kelola -->
         <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px; -fx-padding: 12 8 4 8;" text="KELOLA"/>
         <Button fx:id="btnAdd" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showAdd" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Tambah Barang"/>
+        <Button fx:id="btnEdit" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showEdit" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Edit Barang"/>
         <Button fx:id="btnDelete" alignment="CENTER_LEFT" layoutX="18.0" layoutY="149.0" maxWidth="Infinity" onAction="#showDelete" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Hapus Barang"/>
       </VBox>
     </VBox>

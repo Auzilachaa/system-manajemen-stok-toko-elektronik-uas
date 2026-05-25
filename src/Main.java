@@ -77,9 +77,9 @@ public class Main extends Application {
 
                 case 4:
                     System.out.print("Masukkan ID barang yang akan diupdate: ");
-                    int key2 = input.nextInt();
+                    // int key2 = input.nextInt();
                     input.nextLine();
-                    Manager.edit(key2, input);
+                    // Manager.edit(key2, input);
                     break;
 
                 case 5:
