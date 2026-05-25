@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<BorderPane prefHeight="580" prefWidth="900" style="-fx-background-color: #282a36;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.deleteController">
+  <!-- ===== SIDEBAR KIRI ===== -->
+  <left>
+    <VBox prefWidth="220" style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-width: 0 1 0 0;">
+      <!-- Logo -->
+      <VBox style="-fx-padding: 20 16 12 16; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0;">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+          <Label style="-fx-background-color: #bd93f9; -fx-text-fill: #21222c; -fx-font-size: 14px; -fx-padding: 4 6; -fx-background-radius: 6;" text="◆"/>
+          <Label style="-fx-text-fill: #f8f8f2; -fx-font-size: 14px; -fx-font-weight: bold;" text="kelompok 7"/>
+        </HBox>
+      </VBox>
+      <!-- Nav Items -->
+      <VBox style="-fx-padding: 12 8 8 8;" VBox.vgrow="ALWAYS">
+        <!-- Section: main -->
+        <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px; -fx-padding: 8 8 4 8;" text="MAIN"/>
+        <Button fx:id="btnDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showDashboard" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Home"/>
+        <!-- Section: kelola -->
+        <Label style="-fx-text-fill: #6272a4; -fx-font-size: 10px; -fx-padding: 12 8 4 8;" text="KELOLA"/>
+        <Button fx:id="btnAdd" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showAdd" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Tambah Barang"/>
+        <Button fx:id="btnEdit" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showEdit" style="-fx-background-color: transparent; -fx-text-fill: #6272a4; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Edit Barang"/>
+        <Button fx:id="btnDelete" alignment="CENTER_LEFT" maxWidth="Infinity" onAction="#showDelete" style="-fx-background-color: #282a36; -fx-text-fill: #bd93f9; -fx-font-size: 13px; -fx-padding: 8 10; -fx-background-radius: 6; -fx-border-width: 0; -fx-cursor: hand;" text="Hapus Barang"/>
+      </VBox>
+    </VBox>
+  </left>
+
+  <!-- ===== KONTEN UTAMA ===== -->
+  <center>
+    <BorderPane style="-fx-background-color: #282a36;">
+      <!-- Topbar -->
+      <top>
+        <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 14 20; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0; -fx-background-color: #282a36;">
+          <Label fx:id="pageTitle" style="-fx-text-fill: #f8f8f2; -fx-font-size: 15px; -fx-font-weight: bold;" text="Hapus Barang"/>
+        </HBox>
+      </top>
+
+      <!-- Area Konten -->
+      <center>
+        <HBox style="-fx-background-color: #282a36; -fx-padding: 20;" spacing="16">
+          <!-- Form Panel -->
+          <VBox alignment="TOP_CENTER" spacing="16" style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 24 20;" minWidth="240" prefWidth="260">
+            <Label style="-fx-text-fill: #f8f8f2; -fx-font-size: 14px; -fx-font-weight: bold;" text="Form Hapus"/>
+            <TextField fx:id="namaBarangInput" promptText="Nama barang" style="-fx-background-color: #282a36; -fx-text-fill: #f8f8f2; -fx-prompt-text-fill: #6272a4; -fx-border-color: #44475a; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 8 12;"/>
+            <Button mnemonicParsing="false" onAction="#deleteBarang" maxWidth="Infinity" style="-fx-background-color: #ff5555; -fx-text-fill: #f8f8f2; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 6; -fx-cursor: hand;" text="Hapus">
+              <VBox.margin>
+                <Insets top="8.0"/>
+              </VBox.margin>
+            </Button>
+          </VBox>
+          <!-- Table Panel -->
+          <VBox style="-fx-background-color: #21222c; -fx-border-color: #44475a; -fx-border-radius: 8; -fx-background-radius: 8;" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" spacing="12" style="-fx-padding: 12 50; -fx-border-color: #44475a; -fx-border-width: 0 0 1 0;">
+              <Label style="-fx-text-fill: #6272a4; -fx-font-size: 12px; -fx-font-weight: bold; -fx-min-width: 60; -fx-pref-width: 60;" text="ID"/>
+              <Label style="-fx-text-fill: #6272a4; -fx-font-size: 12px; -fx-font-weight: bold; -fx-min-width: 150;" text="Nama Barang" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+              <Label style="-fx-text-fill: #6272a4; -fx-font-size: 12px; -fx-font-weight: bold; -fx-min-width: 120;" text="Kategori" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+              <Label style="-fx-text-fill: #6272a4; -fx-font-size: 12px; -fx-font-weight: bold; -fx-min-width: 70; -fx-pref-width: 70;" text="Stok"/>
+            </HBox>
+            <ScrollPane VBox.vgrow="ALWAYS" style="-fx-background: #21222c; -fx-background-color: #21222c;" fitToWidth="true">
+              <content>
+                <VBox fx:id="objectContainer" spacing="10">
+                  <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                  </padding>
+                </VBox>
+              </content>
+            </ScrollPane>
+          </VBox>
+        </HBox>
+      </center>
+    </BorderPane>
+  </center>
+</BorderPane>

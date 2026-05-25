@@ -1,4 +1,4 @@
-package data;
+package services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,14 +15,11 @@ import java.util.Scanner;
 public class Manager {
 
     public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    static Path path = Paths.get(System.getProperty("user.dir"), "src/resources/data.json");
+    static Path path = Paths.get(System.getProperty("user.dir"), "src/data/data.json");
     public static String filePath = path.toString();
 
     public static List<Barang> list = new ArrayList<>();
 
-    public static void refreshList() throws Exception {
-        list = load(filePath);
-    }
 
     public static void save(List<Barang> barang) throws IOException {
         try (Writer writer = new FileWriter(filePath)) {
@@ -31,8 +28,8 @@ public class Manager {
 
     }
 
-    public static List<Barang> load(String filename) throws Exception {
-        File file = new File(filename);
+    public static List<Barang> load() throws Exception {
+        File file = new File(filePath);
         if (!file.exists()) {
             return new ArrayList<>();
         }
@@ -48,7 +45,7 @@ public class Manager {
 
     public static void add(Barang barang) throws Exception {
         for (Barang b : list) {
-            if (b.nama.equals(barang.nama) || b.kategori.equals(barang.kategori)) {
+            if (b.nama.equalsIgnoreCase(barang.nama)) {
                 System.out.println("Barang sudah ada");
                 return;
             }
@@ -65,61 +62,36 @@ public class Manager {
         }
     }
 
-    public static void edit(int key2, Scanner input) throws Exception {
-        Barang b = binarySearchId(key2);
+    public static void edit(Barang b, String inputNama, String inputJumlah, String inputKategori, String status) throws Exception {
 
-        if (b == null || !b.status) {
-            System.out.println("[!] Data tidak ditemukan.");
-            return;
-        }
         System.out.println("  EDIT DATA  (Enter = tidak diubah)");
         cetakTersedia(list);
         System.out.println();
 
         // --- Nama (String) ---
-        System.out.print("Nama [" + b.nama + "]: ");
-        String inputNama = input.nextLine().trim();
-        if (!inputNama.isEmpty()) {
-            b.nama = inputNama;
-        }
-
-        // --- Kode (int) ---
-        System.out.print("Kode [" + b.id + "]: ");
-        String inputKode = input.nextLine().trim();
-        if (!inputKode.isEmpty()) {
-            try {
-                b.id = Integer.parseInt(inputKode);
-            } catch (NumberFormatException e) {
-                System.out.println("[!] Bukan angka, kode tidak diubah.");
-            }
-        }
+       b.nama = inputNama;
+        
 
         // --- Kategori (enum) ---
-        System.out.println("Kategori [" + b.kategori + "] (Enter = skip):");
-        kategoriBarang.showKategori();
-        System.out.print("Pilihan: ");
-        String inputKat = input.nextLine().trim();
-        if (!inputKat.isEmpty()) {
+        if (inputKategori != null && !inputKategori.isEmpty()) {
+            kategoriBarang katBaru = null;
             try {
-                kategoriBarang katBaru = kategoriBarang.dariNomor(Integer.parseInt(inputKat));
-                if (katBaru != null) {
-                    b.kategori = katBaru;
-                } else {
-                    System.out.println("[!] Pilihan tidak valid, kategori tidak diubah.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("[!] Kategori tidak diubah.");
+                katBaru = kategoriBarang.valueOf(inputKategori);
+            } catch (IllegalArgumentException e) {
+            }
+            if (katBaru != null) {
+                b.kategori = katBaru;
             }
         }
 
-        System.out.print("stok [" + b.stok + "]: ");
-        String inputJumlah = input.nextLine().trim();
         if (!inputJumlah.isEmpty()) {
             try {
                 b.stok = Integer.parseInt(inputJumlah);
             } catch (NumberFormatException e) {
-                System.out.println("[!] Bukan angka, stok tidak diubah.");
             }
+        }
+        if (!status.isEmpty()) {
+            b.status = Boolean.parseBoolean(status);
         }
 
         try {
@@ -242,6 +214,18 @@ public class Manager {
         return null;
     }
 
+    public static List<Barang> searchByKategori(String kategori) throws Exception{
+        list = load();
+        List<Barang> hasil = new ArrayList<>();
+
+        for (Barang b : list) {
+            if (b.kategori.name().equalsIgnoreCase(kategori)) {
+                hasil.add(b);
+            }
+        }
+        return hasil;
+    }
+
     // ==== SORTING ====
 
     // Bubble Sort berdasarkan ID (Ascending)
@@ -265,29 +249,8 @@ public class Manager {
         }
     }
     
-    // bubble sort berdasarkan ID (descending)
-    public static void SortByIdDESC() {
-        int n = list.size();
-        boolean swapped;
-
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {
-                if (list.get(j).id < list.get(j + 1).id) {
-                    Barang temp = list.get(j);
-                    list.set(j, list.get(j + 1));
-                    list.set(j + 1, temp);
-                    swapped = true;
-                }
-            }
-            // Optimasi
-            if (!swapped)
-                break;
-        }
-    }
-
     // Selection Sort berdasarkan Nama (Ascending A-Z)
-    public static void selectionSortByNama() throws Exception {
+    public static void selectionSortByNama() {
         int n = list.size();
         
         for (int i = 0; i < n - 1; i++) {

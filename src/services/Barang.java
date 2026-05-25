@@ -1,4 +1,4 @@
-package data;
+package services;
 
 public class Barang {
     public int id;
@@ -17,9 +17,9 @@ public class Barang {
         
     }
 
-//     public int getId()                { return id; }
-//     public String getNama()           { return nama; }
-//     public int getStok()              { return stok; }
-//     public kategoriBarang getKategori(){ return kategori; }
-//     public boolean isStatus()         { return status; }
+    public int getId()                { return id; }
+    public String getNama()           { return nama; }
+    public int getStok()              { return stok; }
+    public kategoriBarang getKategori(){ return kategori; }
+    public boolean isStatus()         { return status; }
 }
