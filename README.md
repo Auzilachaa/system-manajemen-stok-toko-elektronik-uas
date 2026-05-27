@@ -52,18 +52,13 @@ system-manajemen-stok-toko-elektronik-uas/
 
 ## 🛠️ Cara Run
 
-1. **Pastikan Java dan Maven sudah terinstall** di perangkat Anda.
-   Gunakan perintah `java -version` dan `mvn -version` untuk mengecek.
-2. **Clone atau buka terminal** di direktori proyek ini:
-   ```bash
-   cd system-manajemen-stok-toko-elektronik-uas
-   ```
-3. **Jalankan aplikasi** menggunakan Maven exec plugin:
-   ```bash
-   mvn exec:java -Dexec.mainClass="com.toko.Main"
-   ```
-4. **Ikuti instruksi di terminal** untuk memasukkan nama barang, stok, kategori, dan status (true/false).
-
+1. **Download dan Install Java** Sebelum menjalankan project, pastikan Java sudah terinstall di laptop.
+2. **Clone Repository GitHub**
+3. **Masuk ke Folder Project**
+4. **Masuk ke Folder Source Code**
+5. **Compile Program Java**
+6. **Jalankan Program**
+   
 ## 📊 Contoh Data
 
 Aplikasi ini menggunakan file `data.json` yang secara otomatis diproses dari entri input Anda. Berikut adalah contoh struktur data barang yang tersimpan:
