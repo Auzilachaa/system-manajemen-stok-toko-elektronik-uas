@@ -15,7 +15,7 @@ import services.Barang;
 import services.Manager;
 import services.kategoriBarang;
 
-public class AddController {
+public class EditController {
 
     @FXML
     private void initialize() throws Exception {
@@ -24,12 +24,12 @@ public class AddController {
                 java.util.Arrays.stream(kategoriBarang.values())
                         .map(Enum::name)
                         .toList());
-        Manager.load();
+        Manager.list = Manager.load();
         tampilkanBarang();
     }
 
     public void tampilkanBarang() throws Exception {
-        Manager.load();
+        Manager.list = Manager.load();
         tampilkanBarang(Manager.list);
     }
 
@@ -57,34 +57,38 @@ public class AddController {
     }
 
     @FXML
-    private void submitBarang() throws Exception {
+    private void submitEdit() throws Exception {
         String nama = namaBarangInput.getText();
         String jumlahStr = jumlahBarangInput.getText();
         String kategoriStr = enumKategoriInput.getValue();
+        String statusStr = statusBarangInput.getText();
 
-        if (nama.isEmpty() || jumlahStr.isEmpty() || kategoriStr == null) {
-            showAlert(AlertType.ERROR, "Error", "Mohon lengkapi semua input.");
+        if (idBarangInput.getText().isEmpty()) {
+            showAlert(AlertType.ERROR, "Error", "Mohon masukkan ID.");
             return;
         }
 
         try {
-            int stokInt = Integer.parseInt(jumlahStr);
-            kategoriBarang kategori = kategoriBarang.valueOf(kategoriStr);
+            int id = Integer.parseInt(idBarangInput.getText());
+            Barang data = Manager.binarySearchId(id);
 
-            int nextId = Manager.getNextId(Manager.list);
+            if (data == null) {
+                showAlert(AlertType.ERROR, "Error", "Barang dengan ID tersebut tidak ditemukan.");
+                return;
+            }
 
-            Barang barang = new Barang(nextId, nama, stokInt, kategori, true);
-            Manager.add(barang);
-
-            showAlert(AlertType.INFORMATION, "Sukses", "Data berhasil ditambahkan.");
+            Manager.edit(data, nama, jumlahStr, kategoriStr, statusStr);
+            showAlert(AlertType.INFORMATION, "Sukses", "Data berhasil diupdate.");
             tampilkanBarang(Manager.list);
 
             // Clear inputs
+            idBarangInput.clear();
             namaBarangInput.clear();
             jumlahBarangInput.clear();
+            statusBarangInput.clear();
             enumKategoriInput.setValue(null);
         } catch (NumberFormatException e) {
-            showAlert(AlertType.ERROR, "Error", "Jumlah harus berupa angka.");
+            showAlert(AlertType.ERROR, "Error", "ID dan Jumlah harus berupa angka.");
         } catch (IllegalArgumentException e) {
             showAlert(AlertType.ERROR, "Error", "Kategori tidak valid.");
         }
@@ -93,11 +97,13 @@ public class AddController {
     @FXML
     private Label pageTitle;
     @FXML
-    private TableView<Barang> tableBarang;
+    private TextField idBarangInput;
     @FXML
     private TextField namaBarangInput;
     @FXML
     private TextField jumlahBarangInput;
+    @FXML
+    private TextField statusBarangInput;
     @FXML
     private ComboBox<String> enumKategoriInput;
     @FXML

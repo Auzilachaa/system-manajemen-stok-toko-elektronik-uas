@@ -1,4 +1,4 @@
-package data;
+package services;
 
 public class Barang {
     public int id;

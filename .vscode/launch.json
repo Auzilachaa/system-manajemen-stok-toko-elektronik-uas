@@ -6,13 +6,7 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "stok-barang"
-        },
-        {
-            "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "mainClass": "Main"
+            "projectName": "system-manajemen-stok-toko-elektronik-uas_a43161cd"
         }
     ]
 }

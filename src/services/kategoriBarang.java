@@ -1,11 +1,8 @@
-package data;
+package services;
 
 public enum kategoriBarang {
     rumahTangga,
     komputer,
-    audio,
-    video,
-    aksesoris,
     lainnya;
 
     public static void showKategori() {

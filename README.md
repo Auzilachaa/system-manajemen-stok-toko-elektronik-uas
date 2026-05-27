@@ -2,18 +2,26 @@
 
 Aplikasi **Sistem Manajemen Stok Toko Elektronik** adalah sebuah program Command Line Interface (CLI) berbasis Java yang dirancang untuk membantu toko elektronik dalam mengelola data persediaan barang (stok) secara efisien. Aplikasi ini memungkinkan pengguna untuk mendata barang masuk, melihat stok saat ini, serta menyimpan semua perubahan data secara permanen menggunakan format JSON.
 
+## Tujuan Project
+
+Project ini dibuat untuk:
+- Membantu pengelolaan stok barang toko elektronik
+- Mengurangi kesalahan pencatatan manual
+- Mempermudah monitoring persediaan barang
+- Menerapkan konsep pemrograman Java dalam studi kasus nyata
+  
 ## 🚀 Fitur
 
-**Fitur Saat Ini (Tersedia):**
 - **Menambah Barang Baru:** Menginput nama barang, stok awal, kategori (misal: Elektronik, Aksesoris), dan status ketersediaan.
 - **Melihat Daftar Barang:** Menampilkan semua data barang beserta jumlah stoknya.
-- **Penyimpanan Permanen (JSON):** Data otomatis disimpan ke dalam file `data.json` dan dimuat kembali saat aplikasi dijalankan, sehingga data tidak hilang.
-
-**Fitur Akan Datang (Roadmap):**
+- **Edit data barang:** Dapat merubah stok,harga dan kategori barang.
 - **Update Stok Barang:** Mengubah atau memperbarui jumlah stok barang yang sudah ada.
 - **Hapus Barang:** Menghapus data barang dari sistem jika barang sudah tidak dijual.
-- **Pencarian & Filter:** Mencari barang berdasarkan nama atau memfilter berdasarkan kategori tertentu.
+- **Cari berdasarkan Nama, ID/kode dan kategori barang:** Mencari data barang sesuai nama,id/kode dan kategori yang kita mau.
+- **Sorting berdasarkan Nama, ID/kode dan jumlah stok terbanyak:** Mensorting data barang sesuai nama,id/kode dan jumlah stok terbanyak.
 - **Antarmuka Interaktif (Menu):** Membuat menu CLI yang lebih interaktif agar pengguna dapat memilih aksi (Tambah, Lihat, Update, Hapus, Keluar) tanpa harus menjalankan program berulang kali.
+- **Penyimpanan Permanen (JSON):** Data otomatis disimpan ke dalam file `data.json` dan dimuat kembali saat aplikasi dijalankan, sehingga data tidak hilang.
+- **Hasil pencarian berupa file:** Membuat file dari hasil yang kita cari untuk mendukung pengambilan keputusan.
 
 ## 💻 Tech Stack
 
@@ -44,18 +52,13 @@ system-manajemen-stok-toko-elektronik-uas/
 
 ## 🛠️ Cara Run
 
-1. **Pastikan Java dan Maven sudah terinstall** di perangkat Anda.
-   Gunakan perintah `java -version` dan `mvn -version` untuk mengecek.
-2. **Clone atau buka terminal** di direktori proyek ini:
-   ```bash
-   cd system-manajemen-stok-toko-elektronik-uas
-   ```
-3. **Jalankan aplikasi** menggunakan Maven exec plugin:
-   ```bash
-   mvn exec:java -Dexec.mainClass="com.toko.Main"
-   ```
-4. **Ikuti instruksi di terminal** untuk memasukkan nama barang, stok, kategori, dan status (true/false).
-
+1. **Download dan Install Java** Sebelum menjalankan project, pastikan Java sudah terinstall di laptop.
+2. **Clone Repository GitHub**
+3. **Masuk ke Folder Project**
+4. **Masuk ke Folder Source Code**
+5. **Compile Program Java**
+6. **Jalankan Program**
+   
 ## 📊 Contoh Data
 
 Aplikasi ini menggunakan file `data.json` yang secara otomatis diproses dari entri input Anda. Berikut adalah contoh struktur data barang yang tersimpan:
