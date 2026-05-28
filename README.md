@@ -31,6 +31,15 @@ Project ini dibuat untuk:
 - **Library Tambahan:** 
   - `Gson` by Google (versi 2.10.1) untuk membaca (parsing) dan menulis format JSON dengan mudah.
 
+## Tech Stack
+
+- ** Java :** Bahasa pemrograman utama untuk membangun sistem.
+- ** OOP (Object-Oriented Programming) :** Konsep pemrograman berbasis objek.
+- ** VS Code / IntelliJ IDEA :** Code editor / IDE.
+- ** Git & GitHub :** Version control dan kolaborasi project.
+- ** Swing / JavaFX :** tampilan GUI.
+
+
 ## 📁 Struktur Project
 
 ```text
@@ -41,10 +50,12 @@ system-manajemen-stok-toko-elektronik-uas/
 │       └── java/
 │           └── com/
 │               └── toko/
-│                   ├── Main.java                # Titik masuk (entry point) aplikasi
+│                   ├── Main.java
+|                   ├── Barang.java   
+|                   ├── StokManager.java          
 │                   ├── data/
-│                   │   ├── Barang.java          # Model data untuk objek Barang
-│                   │   └── Manager.java         # Logika untuk load, save, add, dll (interaksi JSON)
+│                   │   |└── stok.txt    
+│                   │   |└── Manager.java         # Logika untuk load, save, add, dll (interaksi JSON)
 │                   └── resources/
 │                       └── data.json            # File database berformat JSON
 └── target/                     # Hasil kompilasi Maven
