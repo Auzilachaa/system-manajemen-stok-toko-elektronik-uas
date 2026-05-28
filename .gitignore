@@ -3,7 +3,6 @@
 .vscode/*
 bin/*
 lib/*
-*.sh
 *.jar
 *.txt
 javafx-sdk-26.0.1/
