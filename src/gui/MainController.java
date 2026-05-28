@@ -13,6 +13,17 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainController {
+
+    private boolean isUpdating = false;
+
+    @SafeVarargs
+    private void clearOtherSorts(ComboBox<String>... others) {
+        isUpdating = true;
+        for (ComboBox<String> cb : others) {
+            cb.setValue(null);
+        }
+        isUpdating = false;
+    }
     
     @FXML
     private void initialize() throws Exception{
@@ -20,19 +31,16 @@ public class MainController {
 
         idSort.getItems().addAll("ascending");
         idSort.setOnAction(e -> {
-            namaSort.setValue(null);
-            kategoriSort.setValue(null);
-            stokSort.setValue(null);
+            if (isUpdating) return;
+            clearOtherSorts(namaSort, kategoriSort, stokSort);
             Manager.SortByIdASC();
-             tampilkanBarang(Manager.list);
-            
+            tampilkanBarang(Manager.list);
         });
 
         namaSort.getItems().addAll("A-Z");
         namaSort.setOnAction(e -> {
-            idSort.setValue(null);
-            kategoriSort.setValue(null);
-            stokSort.setValue(null);
+            if (isUpdating) return;
+            clearOtherSorts(idSort, kategoriSort, stokSort);
             Manager.selectionSortByNama();
             tampilkanBarang(Manager.list);
         });
@@ -40,10 +48,14 @@ public class MainController {
         for (services.kategoriBarang k : services.kategoriBarang.values()) {
             kategoriSort.getItems().add(k.name());
         }
-        kategoriSort.getItems();
+        kategoriSort.getItems().add("Reset");
         kategoriSort.setOnAction(e -> {
+            if (isUpdating) return;
             String val = kategoriSort.getValue();
             if (val == null) return;
+            int idx = kategoriSort.getSelectionModel().getSelectedIndex();
+            if (idx < 0) return;
+            clearOtherSorts(idSort, namaSort, stokSort);
             if ("Reset".equals(val)) {
                 resetData();
             } else {
@@ -66,12 +78,10 @@ public class MainController {
 
         stokSort.getItems().addAll("descending");
         stokSort.setOnAction(e -> {
-            namaSort.setValue(null);
-            kategoriSort.setValue(null);
-            idSort.setValue(null);
+            if (isUpdating) return;
+            clearOtherSorts(namaSort, kategoriSort, idSort);
             Manager.insertionSortByStok();
             tampilkanBarang(Manager.list);
-            
         });
 
         Manager.list = Manager.load();
@@ -83,10 +93,7 @@ public class MainController {
         try {
             Manager.list = Manager.load();
             tampilkanBarang(Manager.list);
-            idSort.setValue(null);
-            namaSort.setValue(null);
-            kategoriSort.setValue(null);
-            stokSort.setValue(null);
+            clearOtherSorts(idSort, namaSort, kategoriSort, stokSort);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -154,7 +161,6 @@ public class MainController {
     @FXML private ComboBox<String> kategoriSort;
     @FXML private ComboBox<String> stokSort;
 
-    
 
     @FXML
     private void showDashboard(ActionEvent event) throws Exception { SwitchHelper.switchScene("Main.fxml", event); }

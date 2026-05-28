@@ -17,16 +17,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Suppress known JavaFX 26 bug: ComboBox internal ListView
-        // throws IndexOutOfBoundsException on clearAndSelect
-        Thread.currentThread().setUncaughtExceptionHandler((t, e) -> {
-            if (e instanceof IndexOutOfBoundsException
+        // exeption jafafx handler. biar apl ny jalan tanpa error karna bug bawaan jafafx
+        Thread.currentThread().setUncaughtExceptionHandler((t, e) -> { //ngambil thread dan exeption
+            if (e instanceof IndexOutOfBoundsException // cek exception
                 && e.getStackTrace().length > 0
-                && e.getStackTrace()[0].getClassName().contains("ReadOnlyUnbackedObservableList")) {
-                // Known JavaFX bug, ignore silently
-                return;
+                && (e.getStackTrace()[0].getClassName().contains("ReadOnlyUnbackedObservableList")
+                    || e.getStackTrace()[0].getClassName().contains("SelectedItemsReadOnlyObservableList"))) {
+                // bug JavaFX 26, diabaikan
+                return; 
             }
-            // Print other exceptions normally
+            // print exeption lain
             e.printStackTrace();
         });
 

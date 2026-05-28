@@ -27,19 +27,18 @@ Aplikasi **Sistem Manajemen Stok Toko Elektronik** adalah sebuah program Command
 
 ```text
 system-manajemen-stok-toko-elektronik-uas/
-├── pom.xml                     # File konfigurasi Maven dan dependencies
-├── src/
-│   └── main/
-│       └── java/
-│           └── com/
-│               └── toko/
-│                   ├── Main.java                # Titik masuk (entry point) aplikasi
-│                   ├── data/
-│                   │   ├── Barang.java          # Model data untuk objek Barang
-│                   │   └── Manager.java         # Logika untuk load, save, add, dll (interaksi JSON)
-│                   └── resources/
-│                       └── data.json            # File database berformat JSON
-└── target/                     # Hasil kompilasi Maven
+src/
+├── Main.java
+├── data/
+│   └── data.json
+├── services/
+│   ├── Barang.java
+│   ├── kategoriBarang.java
+│   ├── Manager.java
+│   └── exportToPdf.java
+├── gui/
+├── lib/
+├── repots/
 ```
 
 ## 🛠️ Cara Run

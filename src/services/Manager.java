@@ -215,10 +215,10 @@ public class Manager {
     }
 
     public static List<Barang> searchByKategori(String kategori) throws Exception{
-        list = load();
+        List<Barang> data = load();
         List<Barang> hasil = new ArrayList<>();
 
-        for (Barang b : list) {
+        for (Barang b : data) {
             if (b.kategori.name().equalsIgnoreCase(kategori)) {
                 hasil.add(b);
             }
