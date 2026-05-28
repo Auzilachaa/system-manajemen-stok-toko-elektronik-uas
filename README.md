@@ -82,9 +82,13 @@ src/
 
 4. **Masuk ke Folder Project**
 5. **Masuk ke Folder Source Code**
-6. **Compile Program Java**
-7. **Jalankan Program**
-   
+6. **Compile dan run program**
+
+```
+./run.sh // untuk linux atau mac
+./run.bat // untuk windows
+```
+
 ## 📊 Contoh Data
 
 Aplikasi ini menggunakan file `data.json` yang secara otomatis diproses dari entri input Anda. Berikut adalah contoh struktur data barang yang tersimpan:
