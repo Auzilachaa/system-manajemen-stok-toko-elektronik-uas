@@ -62,7 +62,7 @@ src/
 ## 🛠️ Cara Run
 
 1. **Download dan Install Java** Sebelum menjalankan project, pastikan Java sudah terinstall di laptop.\
-2. **Download Library** [download disini](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar) [download disini](https://itextpdf.com/resources/api-documentation/itext-5-java) [download disini](https://gluonhq.com/products/javafx/)
+2. **Download Library** [download gson disini](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.13.2/gson-2.13.2.jar) [download iText5 disini](https://itextpdf.com/resources/api-documentation/itext-5-java) [download javafx disini](https://gluonhq.com/products/javafx/)
 3. install library di folder project
 ```text
 system-manajemen-stok-toko-elektronik-uas/
